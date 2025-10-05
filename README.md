@@ -2,6 +2,9 @@
 
 This project is a knockoff of a distributed search engine. It now showcases Kafka-backed ingestion, BM25 + semantic reranking, Prometheus-first observability, and container/Kubernetes deployment assets. The codebase is organized into independently deployable services written in Go to demonstrate distributed-system design skills.
 
+<img width="1109" height="283" alt="Screenshot 2025-10-06 at 00 12 39" src="https://github.com/user-attachments/assets/f08f4a24-26e8-4d46-9b7d-4136ce5a621e" />
+
+
 ## Features
 
 - Concurrent crawler with adaptive politeness and duplicate URL detection
