@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dse-indexer
+spec:
+  selector:
+    app: dse-indexer
+  ports:
+    - port: 9101
+      targetPort: 9101
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dse-indexer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dse-indexer
+  template:
+    metadata:
+      labels:
+        app: dse-indexer
+    spec:
+      containers:
+        - name: indexer
+          image: ghcr.io/eshwanth/distributed-search-engine/indexer:latest
+          ports:
+            - containerPort: 9101
+          env:
+            - name: KAFKA_BROKERS
+              value: kafka:9092
+            - name: KAFKA_DOCUMENT_TOPIC
+              value: documents
+            - name: INDEXER_GROUP
+              value: indexer
+            - name: SNAPSHOT_PATH
+              value: /data/index.snapshot.json
+            - name: METRICS_ADDR
+              value: :9101
+          volumeMounts:
+            - name: snapshot
+              mountPath: /data
+      volumes:
+        - name: snapshot
+          persistentVolumeClaim:
+            claimName: dse-snapshot-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dse-snapshot-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

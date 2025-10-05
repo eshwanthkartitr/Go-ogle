@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: dse-crawler
+spec:
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: crawler
+          image: ghcr.io/eshwanth/distributed-search-engine/orchestrator:latest
+          env:
+            - name: KAFKA_BROKERS
+              value: kafka:9092
+            - name: KAFKA_DOCUMENT_TOPIC
+              value: documents
+            - name: SEED_DIR
+              value: /app/testdata/pages

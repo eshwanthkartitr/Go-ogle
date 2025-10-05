@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dse-prometheus-config
+  labels:
+    app: dse-prometheus
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 5s
+    scrape_configs:
+      - job_name: searchapi
+        static_configs:
+          - targets: ['dse-searchapi:9102']
+      - job_name: indexer
+        static_configs:
+          - targets: ['dse-indexer:9101']
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dse-prometheus
+spec:
+  selector:
+    app: dse-prometheus
+  ports:
+    - port: 9090
+      targetPort: 9090
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dse-prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dse-prometheus
+  template:
+    metadata:
+      labels:
+        app: dse-prometheus
+    spec:
+      containers:
+        - name: prometheus
+          image: prom/prometheus:latest
+          args:
+            - "--config.file=/etc/prometheus/prometheus.yml"
+          ports:
+            - containerPort: 9090
+          volumeMounts:
+            - name: config
+              mountPath: /etc/prometheus
+      volumes:
+        - name: config
+          configMap:
+            name: dse-prometheus-config

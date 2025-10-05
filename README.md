@@ -77,5 +77,4 @@ This starts Kafka, runs the crawler once to seed the topic, keeps the indexer an
 - Integrate transformer-based rerankers (e.g., ColBERT) and deploy a vector database such as Milvus
 - Add authn/z with API keys and rate-limiting at the edge tier
 - Expand Kubernetes manifests with HPA rules and service meshes for resilience tests
-- Wire Grafana dashboards and alert rules on top of the exported Prometheus metrics
-# Go-ogle
+
