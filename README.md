@@ -1,6 +1,6 @@
 # Go-ogle: A Distributed Search Engine MVP
 
-This project is a production-minded MVP of a distributed search engine. It now showcases Kafka-backed ingestion, BM25 + semantic reranking, Prometheus-first observability, and container/Kubernetes deployment assets. The codebase is organized into independently deployable services written in Go to demonstrate distributed-system design skills.
+This project is a knockoff of a distributed search engine. It now showcases Kafka-backed ingestion, BM25 + semantic reranking, Prometheus-first observability, and container/Kubernetes deployment assets. The codebase is organized into independently deployable services written in Go to demonstrate distributed-system design skills.
 
 ## Features
 
