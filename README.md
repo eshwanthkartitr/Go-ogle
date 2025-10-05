@@ -75,7 +75,8 @@ This starts Kafka, runs the crawler once to seed the topic, keeps the indexer an
   go test ./...
   ```
 
-<img width="896" height="240" alt="Screenshot 2025-10-06 at 00 39 18" src="https://github.com/user-attachments/assets/d9c262d0-a1c9-4d1a-a89b-c5976daa8560" />
+<img width="669" height="83" alt="Screenshot 2025-10-06 at 00 41 21" src="https://github.com/user-attachments/assets/b92fafd3-aff2-4701-9ec9-35312253aa7f" />
+
 
 
 ## Next Steps
